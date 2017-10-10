@@ -2,7 +2,7 @@
 * @Author: miaoxinyu.zh
 * @Date:   2017-08-22 06:06:10
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-10 17:07:15
+ * @Last Modified time: 2017-10-10 17:17:26
 */
 import React from 'react';
 import {
@@ -43,9 +43,9 @@ class PartyFee extends React.Component {
     if (resp.BK_STATUS == "00") {
       for (let i = 0; i < resp.LIST1.length; i++) {
         let item = {
-          month = '',
-          money = '',
-          status = '00'
+          month:'',
+          money :'',
+          status :'00'
         };
         item.month = resp.LIST1[i].Mo_MO;
         item.money = resp.LIST1[i].Pbl_Pty_Fee_Amt;
@@ -72,9 +72,9 @@ class PartyFee extends React.Component {
           this.data =[];
           for (let i = 0; i < resp.LIST1.length; i++) {
             let item = {
-              month = '',
-              money = '',
-              status = '00'
+              month:'',
+              money:'',
+              status:'00'
             };
             item.month = resp.LIST1[i].Mo_MO;
             item.money = resp.LIST1[i].Pbl_Pty_Fee_Amt;

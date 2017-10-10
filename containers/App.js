@@ -57,7 +57,7 @@ const TabContainer = TabNavigator(
 
 const App = StackNavigator(
   {
-    // Splash: { screen: Splash },
+    Splash: { screen: Splash },
     Home: {
       screen: TabContainer,
       navigationOptions: {
@@ -71,12 +71,12 @@ const App = StackNavigator(
       }
     },
     Detail:{screen:Detail},
-    // Login: {
-    //   screen : Login,
-    //   navigationOptions: {
-    //     header: null,
-    //   }
-    // },
+    Login: {
+      screen : Login,
+      navigationOptions: {
+        header: null,
+      }
+    },
     PartyInfo:{
       screen:PartyInfo,
       navigationOptions: {
@@ -103,7 +103,7 @@ const App = StackNavigator(
     },
   },
   {
-    // initialRouteName:'Splash',
+    initialRouteName:'Splash',
     headerMode: 'screen',
     navigationOptions: {
       headerStyle: {

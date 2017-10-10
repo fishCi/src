@@ -4,8 +4,22 @@ import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Sepa
 import common from '../../common'
 import EmptyView from '../../components/EmptyView'
 import Icon from 'react-native-vector-icons/Ionicons';
+import {getUser} from '../../utils/StorageUtil'
 
 export default class Person extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      user:{}
+    };
+  }
+
+  async componentDidMount() {
+     u = await getUser();
+     this.setState({user:u});
+  }
+
   render() {
     return (
       <Container>
@@ -14,7 +28,7 @@ export default class Person extends Component {
             <ListItem>
               <Thumbnail square size={80} source={require('../../img/person/hongjun.png')} />
               <Body>
-                <Text>张三</Text>
+                <Text>{this.state.user.Usr_Nm}</Text>
                 <Text note>中国建设银行 北京开发中心</Text>
               </Body>
             </ListItem>

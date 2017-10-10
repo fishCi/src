@@ -57,7 +57,6 @@ class Party extends Component {
 
   render() {
     const { ready } = this.state;
-
     return (
       <View>
         <ScrollView>
