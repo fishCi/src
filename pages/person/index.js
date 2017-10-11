@@ -44,10 +44,15 @@ export default class Person extends Component {
         };
         item.time = resp.LIST1[i].Rsm_StDt;
         item.title = resp.LIST1[i].PtyTbr_Org_Nm + ' ' + resp.LIST1[i].PtyBr_Org_Nm + ' ' + resp.LIST1[i].PtyTm_Org_Nm
-        item.description = '党员'
+        item.description = '01'
         this.records.push(item);
       }
       this.setState({ ready: true })
+      // storage.save({
+      //   key: 'partyInfo',
+      //   data: JSON.stringify(resp),
+      //   // expires: 1000 * 3600 
+      // }).then(() => this.setState({ ready: true }))
     } else {
       alert(resp.BK_DESC)
     }
@@ -88,7 +93,7 @@ export default class Person extends Component {
                 <Icon name='ios-people-outline' size={25} color='skyblue' />
               </Left>
               <Body>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Party', { name: this.name, position: this.pos, records: this.records })}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Party', { name: this.name, position: this.pos, records: this.records,desp:this.description})}>
                   <Text>组织关系</Text>
                 </TouchableOpacity>
               </Body>

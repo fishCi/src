@@ -13,12 +13,14 @@ class Party extends Component {
   name = '';
   position = '';
   records = [];
+  desp = '';
 
   constructor() {
     super();
     this.name = this.props.navigation.state.params.name;
     this.position = this.props.navigation.state.params.position;
     this.records =  this.props.navigation.state.params.records; 
+    this.desp = this.props.navigation.state.params.desp; 
   }
 
   render() {
@@ -59,7 +61,7 @@ class Party extends Component {
             <Button bordered danger onPress={() => this.props.navigation.navigate('PartyFee')} style={{ height: 30 }}>
               <Text style={{ color: 'red' }}>缴纳党费</Text>
             </Button>
-            <Button bordered danger onPress={() => this.props.navigation.navigate('PartyInfo',{position:this.position})} style={{ height: 30 }}>
+            <Button bordered danger onPress={() => this.props.navigation.navigate('PartyInfo',{position:this.position,desp:this.desp})} style={{ height: 30 }}>
               <Text style={{ color: 'red' }}>革命战友</Text>
             </Button>
           </View>

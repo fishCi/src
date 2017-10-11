@@ -2,7 +2,7 @@
 * @Author: miaoxinyu.zh
 * @Date:   2017-08-22 06:06:10
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-11 10:56:28
+ * @Last Modified time: 2017-10-11 14:08:19
 */
 
 import React from 'react';
@@ -37,7 +37,7 @@ class PartyInfo extends React.Component {
     super();
     this.state = {
       ready: false,
-      position: 'zongzhi', //enum：zongzhi，zhibu
+      position: this.props.navigation.state.params.desp, //enum：zongzhi，zhibu
       branch: '第一党支部',
       group: '第一党小组',
       data: getPartyPieData('sex')
@@ -84,7 +84,7 @@ class PartyInfo extends React.Component {
   }
 
   _onClickPie = (value) => {
-    this.setState({ data: getPartyPieData(this.state.)})
+    this.setState({ data: getPartyPieData(value)})
   }
 
 
@@ -237,7 +237,7 @@ class PartyInfo extends React.Component {
        this.info.branchDate.xw = resp.LIST2[4].Usr_Nm
 
        this.info.groupData.zz = resp.Usr_Nm;
-       this.info.groupData.zy = resp.LIST3.join();
+       this.info.groupData.zy = resp.LIST3.map((item)=>{item.Usr_Nm}).join();
        
       this.setState({ ready: true })
     } else {

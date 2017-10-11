@@ -14,7 +14,7 @@ global.storage = storage;
 export function getUser(){
   storage.load({
     key: 'user',
-  }).then(ret => r = JSON.parse(ret)
+  }).then(ret => JSON.parse(ret)
   ).catch(err => alert(err.message))
 }
 
