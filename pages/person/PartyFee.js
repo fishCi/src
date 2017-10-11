@@ -2,7 +2,7 @@
 * @Author: miaoxinyu.zh
 * @Date:   2017-08-22 06:06:10
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-10 17:17:26
+ * @Last Modified time: 2017-10-11 10:40:24
 */
 import React from 'react';
 import {
@@ -17,6 +17,7 @@ import {
 import { Button, Card, CardItem } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import EmptyView from '../../components/EmptyView';
+import { getUser } from '../../utils/StorageUtil'
 import { fetchPost } from '../../utils/fetchAPI';
 
 class PartyFee extends React.Component {
@@ -30,9 +31,10 @@ class PartyFee extends React.Component {
   }
   data = []
 
-  componentDidMount() {
+  async componentDidMount() {
+    u = await getUser();    
     fetchPost('A08463104', {
-      Pty_Grp_Stm_Usr_ID: '01000364',
+      Pty_Grp_Stm_Usr_ID:  u.Pty_Grp_Stm_Usr_ID,
       Yr_YYYY: '2017'
     }, this._success.bind(this), this._failure.bind(this))
   }
@@ -118,8 +120,6 @@ class PartyFee extends React.Component {
       </View>
     );
   }
-
-
 
   render() {
     return (

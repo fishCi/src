@@ -2,7 +2,7 @@
  * @Author: zhaozheng1.zh 
  * @Date: 2017-09-11 14:57:49 
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-09-30 09:08:02
+ * @Last Modified time: 2017-10-11 09:14:07
  */
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ImageBackground } from 'react-native';
@@ -44,7 +44,7 @@ const submit = (values, navigate) => {
         Move_Tel_No: '',
         Rsrv_Fld1: '',
         Rsrv_Fld2: '',
-    }, resp=>success(resp,navigate), failure)
+    }, resp => success(resp, navigate), failure)
 
     // const json = await this.fetchUser();
     // if (json.results[0].login.username == values.name
@@ -119,33 +119,33 @@ const submit = (values, navigate) => {
     // }
 }
 
-  function success(resp,navigate) {
-    if (resp.BK_STATUS == "00") {        
-      storage.save({
-         key: 'user',
-         data: JSON.stringify(resp),
-         // expires: 1000 * 3600 
-    }).then(()=>navigate('Home'))
-    }else{
+function success(resp, navigate) {
+    if (resp.BK_STATUS == "00") {
+        storage.save({
+            key: 'user',
+            data: JSON.stringify(resp),
+            // expires: 1000 * 3600 
+        }).then(() => navigate('Home'))
+    } else {
         Toast.show({
             text: resp.BK_DESC,
             position: 'bottom',
             buttonText: 'OK',
-            type:'danger',
-            duration:4000
+            type: 'danger',
+            duration: 4000
         })
     }
-  };
+};
 
-  function failure(error) {
-        Toast.show({
-            text: error,
-            position: 'bottom',
-            buttonText: 'OK',
-            type:'danger',
-            duration:4000
-        })
-  };
+function failure(error) {
+    Toast.show({
+        text: error,
+        position: 'bottom',
+        buttonText: 'OK',
+        type: 'danger',
+        duration: 4000
+    })
+};
 
 
 

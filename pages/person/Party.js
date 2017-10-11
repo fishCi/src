@@ -10,53 +10,18 @@ import { fetchPost } from '../../utils/fetchAPI';
 
 class Party extends Component {
 
-  constructor() {
-    super();
-    this.state = {
-      ready: false
-    };
-  }
-
   name = '';
   position = '';
   records = [];
 
-  componentDidMount() {
-    fetchPost('A08463101', {
-      Pty_Grp_Stm_Usr_ID: '01000364',
-    }, this._success.bind(this), this._failure.bind(this))
+  constructor() {
+    super();
+    this.name = this.props.navigation.state.params.name;
+    this.position = this.props.navigation.state.params.position;
+    this.records =  this.props.navigation.state.params.records; 
   }
 
-
-  _success(resp) {
-    if (resp.BK_STATUS == "00") {
-      this.name = resp.Usr_Nm;
-      this.position = resp.PtyTbr_Org_Nm + ' ' + resp.PtyBr_Org_Nm + ' ' + resp.PtyTm_Org_Nm
-      for (let i = 0; i < resp.LIST1.length; i++) {
-        let item = {
-          lineColor: 'red',
-          icon: require('../../img/person/dang.png'),
-          time: '',
-          title: '',
-          description: ''
-        };
-        item.time = resp.LIST1[i].Rsm_StDt;
-        item.title = resp.LIST1[i].PtyTbr_Org_Nm + ' ' + resp.LIST1[i].PtyBr_Org_Nm + ' ' + resp.LIST1[i].PtyTm_Org_Nm
-        item.description = '党员'
-        this.records.push(item);
-      }
-      this.setState({ ready: true })
-    } else {
-      alert(resp.BK_DESC)
-    }
-  };
-
-  _failure(error) {
-    alert(error);
-  };
-
   render() {
-    const { ready } = this.state;
     return (
       <View>
         <ScrollView>
@@ -94,7 +59,7 @@ class Party extends Component {
             <Button bordered danger onPress={() => this.props.navigation.navigate('PartyFee')} style={{ height: 30 }}>
               <Text style={{ color: 'red' }}>缴纳党费</Text>
             </Button>
-            <Button bordered danger onPress={() => this.props.navigation.navigate('PartyInfo')} style={{ height: 30 }}>
+            <Button bordered danger onPress={() => this.props.navigation.navigate('PartyInfo',{position:this.position})} style={{ height: 30 }}>
               <Text style={{ color: 'red' }}>革命战友</Text>
             </Button>
           </View>

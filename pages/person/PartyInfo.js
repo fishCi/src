@@ -2,7 +2,7 @@
 * @Author: miaoxinyu.zh
 * @Date:   2017-08-22 06:06:10
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-11 07:27:45
+ * @Last Modified time: 2017-10-11 10:56:28
 */
 
 import React from 'react';
@@ -21,6 +21,7 @@ import { getPartyInfoData } from '../../utils/PartyData'
 import { getPartyPieData } from '../../utils/PartyData'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { PieChart } from 'react-native-charts-wrapper';
+import { getUser } from '../../utils/StorageUtil'
 
 const legend = {
   enabled: true,
@@ -210,10 +211,12 @@ class PartyInfo extends React.Component {
     );
   }
 
-  componentDidMount() {
-    fetchPost('A08463104', {
-      Pty_Grp_Stm_Usr_ID: '01000364',
-      Yr_YYYY: '2017'
+  async componentDidMount() {    
+    pos =  this.props.navigation.state.params.position.split(' ');
+    fetchPost('A08463105', {
+       PtyTbr_Org_ID:pos[0],
+       PtyBr_Org_ID:pos[1],
+       PtyTm_Org_ID:pos[2]
     }, this._success.bind(this), this._failure.bind(this))
   }
 
@@ -221,17 +224,20 @@ class PartyInfo extends React.Component {
 
   _success(resp) {
     if (resp.BK_STATUS == "00") {
-       this.info.centerDate.sj = el.LIST1[0]
-       this.info.centerDate.fsj = el.LIST1[1]
-       this.info.centerDate.jw = el.LIST1[2]
-       this.info.centerDate.zw= el.LIST1[3]
-       this.info.centerDate.xw = el.LIST1[4]
+       this.info.centerDate.sj = resp.LIST1[0].Usr_Nm
+       this.info.centerDate.fsj = resp.LIST1[1].Usr_Nm
+       this.info.centerDate.jw =resp.LIST1[2].Usr_Nm
+       this.info.centerDate.zw= resp.LIST1[3].Usr_Nm
+       this.info.centerDate.xw = resp.LIST1[4].Usr_Nm
 
-       this.info.groupDate.sj = el.LIST2[0]
-       this.info.centerDate.fsj = el.LIST2[1]
-       this.info.centerDate.jw = el.LIST2[2]
-       this.info.centerDate.zw = el.LIST2[3]
-       this.info.centerDate.xw = el.LIST2[4] 
+       this.info.branchDate.sj = resp.LIST2[0].Usr_Nm
+       this.info.branchDate.fsj = resp.LIST2[1].Usr_Nm
+       this.info.branchDate.jw = resp.LIST2[2].Usr_Nm
+       this.info.branchDate.zw = resp.LIST2[3].Usr_Nm
+       this.info.branchDate.xw = resp.LIST2[4].Usr_Nm
+
+       this.info.groupData.zz = resp.Usr_Nm;
+       this.info.groupData.zy = resp.LIST3.join();
        
       this.setState({ ready: true })
     } else {

@@ -4,32 +4,69 @@ import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Sepa
 import common from '../../common'
 import EmptyView from '../../components/EmptyView'
 import Icon from 'react-native-vector-icons/Ionicons';
-import {getUser} from '../../utils/StorageUtil'
+import { getUser } from '../../utils/StorageUtil'
 
 export default class Person extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      user:{}
-    };
+      ready: false
+    }
   }
+
+  name = '';
+  dscp = '中国建设银行 北京开发中心';
+  pos = '';
+  records = '';
+
 
   async componentDidMount() {
-     u = await getUser();
-     this.setState({user:u});
+    u = await getUser();
+    fetchPost('A08463101', {
+      Pty_Grp_Stm_Usr_ID: u.Pty_Grp_Stm_Usr_ID,
+    }, this._success.bind(this), this._failure.bind(this))
   }
 
-  render() {
+
+  _success(resp) {
+    if (resp.BK_STATUS == "00") {
+      this.name = resp.Usr_Nm;
+      this.dscp = resp.Wrk_Unit_Nm + ' ' + resp.Blng_Dept_Nm
+      this.position = resp.PtyTbr_Org_Nm + ' ' + resp.PtyBr_Org_Nm + ' ' + resp.PtyTm_Org_Nm
+      for (let i = 0; i < resp.LIST1.length; i++) {
+        let item = {
+          lineColor: 'red',
+          icon: require('../../img/person/dang.png'),
+          time: '',
+          title: '',
+          description: ''
+        };
+        item.time = resp.LIST1[i].Rsm_StDt;
+        item.title = resp.LIST1[i].PtyTbr_Org_Nm + ' ' + resp.LIST1[i].PtyBr_Org_Nm + ' ' + resp.LIST1[i].PtyTm_Org_Nm
+        item.description = '党员'
+        this.records.push(item);
+      }
+      this.setState({ ready: true })
+    } else {
+      alert(resp.BK_DESC)
+    }
+  };
+
+  _failure(error) {
+    alert(error);
+  };
+
+
+  _page = () => {
     return (
-      <Container>
         <Content>
           <List>
             <ListItem>
               <Thumbnail square size={80} source={require('../../img/person/hongjun.png')} />
               <Body>
-                <Text>{this.state.user.Usr_Nm}</Text>
-                <Text note>中国建设银行 北京开发中心</Text>
+                <Text>{this.name}</Text>
+                <Text note>{this.dscp}}</Text>
               </Body>
             </ListItem>
             <Separator />
@@ -51,7 +88,7 @@ export default class Person extends Component {
                 <Icon name='ios-people-outline' size={25} color='skyblue' />
               </Left>
               <Body>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Party')}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Party', { name: this.name, position: this.pos, records: this.records })}>
                   <Text>组织关系</Text>
                 </TouchableOpacity>
               </Body>
@@ -94,9 +131,17 @@ export default class Person extends Component {
                 <Icon name='ios-arrow-forward-outline' size={25} color='black' />
               </Right>
             </ListItem>
-            <Separator />            
+            <Separator />
           </List>
         </Content>
+    );
+
+  }
+
+  render() {
+    return (
+      <Container>
+        {this.state.ready ? this._page() : <ActivityIndicator size="large" />}
       </Container>
     );
   }
