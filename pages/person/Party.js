@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, StatusBar, Image, TouchableOpacity, ScrollView, RefreshControl, Dimensions } from 'react-native';
-import { Content, Icon, Left, Body, Right, List, ListItem, Separator, Text, Button, Thumbnail, ActivityIndicator } from 'native-base';
+import { View, StyleSheet, StatusBar, Image, TouchableOpacity, ScrollView, RefreshControl, Dimensions, ActivityIndicator } from 'react-native';
+import { Content, Icon, Left, Body, Right, List, ListItem, Separator, Text, Button, Thumbnail } from 'native-base';
 import common from '../../common';
 import MenuItem from './menuItem';
 import Timeline from 'react-native-timeline-listview';
@@ -11,16 +11,16 @@ import { fetchPost } from '../../utils/fetchAPI';
 class Party extends Component {
 
   name = '';
-  position = '';
+  department = '';
   records = [];
-  desp = '';
+  pos = '';
 
   constructor() {
     super();
     this.name = this.props.navigation.state.params.name;
-    this.position = this.props.navigation.state.params.position;
+    this.department = this.props.navigation.state.params.department;
     this.records =  this.props.navigation.state.params.records; 
-    this.desp = this.props.navigation.state.params.desp; 
+    this.pos = this.props.navigation.state.params.pos; 
   }
 
   render() {
@@ -32,7 +32,7 @@ class Party extends Component {
               <Thumbnail square size={80} source={require('../../img/person/hongjun.png')} />
               <Body>
                 <Text>{this.name}</Text>
-                <Text note>{this.position}</Text>
+                <Text note>{this.department}</Text>
               </Body>
             </ListItem>
           </List>
@@ -61,7 +61,7 @@ class Party extends Component {
             <Button bordered danger onPress={() => this.props.navigation.navigate('PartyFee')} style={{ height: 30 }}>
               <Text style={{ color: 'red' }}>缴纳党费</Text>
             </Button>
-            <Button bordered danger onPress={() => this.props.navigation.navigate('PartyInfo',{position:this.position,desp:this.desp})} style={{ height: 30 }}>
+            <Button bordered danger onPress={() => this.props.navigation.navigate('PartyInfo',{department:this.department,pos:this.pos})} style={{ height: 30 }}>
               <Text style={{ color: 'red' }}>革命战友</Text>
             </Button>
           </View>

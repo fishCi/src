@@ -2,7 +2,7 @@
 * @Author: miaoxinyu.zh
 * @Date:   2017-08-22 06:06:10
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-11 14:08:19
+ * @Last Modified time: 2017-10-11 15:00:32
 */
 
 import React from 'react';
@@ -37,7 +37,7 @@ class PartyInfo extends React.Component {
     super();
     this.state = {
       ready: false,
-      position: this.props.navigation.state.params.desp, //enum：zongzhi，zhibu
+      position: this.props.navigation.state.params.pos, //enum：zongzhi，zhibu
       branch: '第一党支部',
       group: '第一党小组',
       data: getPartyPieData('sex')
@@ -146,8 +146,6 @@ class PartyInfo extends React.Component {
                 <Text style={{ flex: 1, fontSize: 12 }}>宣传委员：{this.info.branchData.xw}</Text>
               </View>
             </View>
-
-
           </View>
 
           <View style={{ height: 100, backgroundColor: 'white', flexDirection: 'row', borderTopWidth: 6, borderBottomWidth: 6, borderColor: 'darkblue', marginVertical: 5 }}>
@@ -212,11 +210,11 @@ class PartyInfo extends React.Component {
   }
 
   async componentDidMount() {    
-    pos =  this.props.navigation.state.params.position.split(' ');
+    const department =  this.props.navigation.state.params.department.split(' ');
     fetchPost('A08463105', {
-       PtyTbr_Org_ID:pos[0],
-       PtyBr_Org_ID:pos[1],
-       PtyTm_Org_ID:pos[2]
+       PtyTbr_Org_ID:department[0],
+       PtyBr_Org_ID:department[1],
+       PtyTm_Org_ID:department[2]
     }, this._success.bind(this), this._failure.bind(this))
   }
 
@@ -251,8 +249,6 @@ class PartyInfo extends React.Component {
 
 }
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -261,8 +257,5 @@ const styles = StyleSheet.create({
     flex: 1
   }
 });
-
-
-
 
 export default PartyInfo;

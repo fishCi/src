@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, StatusBar, Image, TouchableOpacity, ScrollView, RefreshControl, Dimensions } from 'react-native'
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Left, Right } from 'native-base';
+import { View, StyleSheet, StatusBar, Image, TouchableOpacity, ScrollView, RefreshControl, Dimensions ,ActivityIndicator } from 'react-native'
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Left, Right} from 'native-base';
 import common from '../../common'
 import EmptyView from '../../components/EmptyView'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -17,8 +17,9 @@ export default class Person extends Component {
 
   name = '';
   dscp = '中国建设银行 北京开发中心';
-  pos = '';
+  department = '';
   records = '';
+  pos = false;
 
 
   async componentDidMount() {
@@ -32,8 +33,9 @@ export default class Person extends Component {
   _success(resp) {
     if (resp.BK_STATUS == "00") {
       this.name = resp.Usr_Nm;
-      this.dscp = resp.Wrk_Unit_Nm + ' ' + resp.Blng_Dept_Nm
-      this.position = resp.PtyTbr_Org_Nm + ' ' + resp.PtyBr_Org_Nm + ' ' + resp.PtyTm_Org_Nm
+      this.dscp = resp.Wrk_Unit_Nm + ' ' + resp.Blng_Dept_Nm;
+      this.department = resp.PtyTbr_Org_Nm + ' ' + resp.PtyBr_Org_Nm + ' ' + resp.PtyTm_Org_Nm;
+      this.pos = resp.List3 === undefined? true:false
       for (let i = 0; i < resp.LIST1.length; i++) {
         let item = {
           lineColor: 'red',
@@ -44,7 +46,7 @@ export default class Person extends Component {
         };
         item.time = resp.LIST1[i].Rsm_StDt;
         item.title = resp.LIST1[i].PtyTbr_Org_Nm + ' ' + resp.LIST1[i].PtyBr_Org_Nm + ' ' + resp.LIST1[i].PtyTm_Org_Nm
-        item.description = '01'
+        item.description = '党员'
         this.records.push(item);
       }
       this.setState({ ready: true })
@@ -93,7 +95,7 @@ export default class Person extends Component {
                 <Icon name='ios-people-outline' size={25} color='skyblue' />
               </Left>
               <Body>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Party', { name: this.name, position: this.pos, records: this.records,desp:this.description})}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Party', { name: this.name, department: this.department, records: this.records,pos:this.pos})}>
                   <Text>组织关系</Text>
                 </TouchableOpacity>
               </Body>
