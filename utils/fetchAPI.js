@@ -2,14 +2,15 @@
  * @Author: zhaozheng1.zh 
  * @Date: 2017-09-28 14:59:05 
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-09-30 16:07:18
+ * @Last Modified time: 2017-10-12 15:56:50
  */
 
 import CONFIG from './config';
 
 export function fetchPost(serviceId, jsonData, success, failure){
+        jsonData.transaction_id = serviceId;
         jd = JSON.stringify(jsonData);
-        url =`${CONFIG.URL}?_fw_service_id=pmsLoginTransaction&transaction_id=${serviceId}&jsonData=${jd}`;
+        url =`${CONFIG.URL}?_fw_service_id=F30070011&jsonClass=java.util.HashMap&jsonData=${jd}`;
         fetch(url)
             .then((response) =>response.json())
             .then((responseText) => success(responseText))
