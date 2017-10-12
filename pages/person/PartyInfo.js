@@ -2,7 +2,7 @@
 * @Author: miaoxinyu.zh
 * @Date:   2017-08-22 06:06:10
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-11 15:00:32
+ * @Last Modified time: 2017-10-12 09:48:10
 */
 
 import React from 'react';
@@ -84,7 +84,7 @@ class PartyInfo extends React.Component {
   }
 
   _onClickPie = (value) => {
-    this.setState({ data: getPartyPieData(value)})
+    this.setState({ data: getPartyPieData(value) })
   }
 
 
@@ -174,7 +174,7 @@ class PartyInfo extends React.Component {
               </View>
             </View>
           </View>
-          {this.state.position !== '' &&
+          {this.state.position !== '00' &&
             <View>
               <View style={{ flexDirection: 'row', justifyContent: 'space-around', borderTopWidth: 1, borderColor: 'lightgrey', marginVertical: 5, paddingVertical: 5 }}>
                 <Button rounded light style={{ justifyContent: 'center', height: 20 }} onPress={() => { this._onClickPie('sex') }}><Text>性  别</Text></Button>
@@ -209,12 +209,12 @@ class PartyInfo extends React.Component {
     );
   }
 
-  async componentDidMount() {    
-    const department =  this.props.navigation.state.params.department.split(' ');
+  async componentDidMount() {
+    const department = this.props.navigation.state.params.department.split(' ');
     fetchPost('A08463105', {
-       PtyTbr_Org_ID:department[0],
-       PtyBr_Org_ID:department[1],
-       PtyTm_Org_ID:department[2]
+      PtyTbr_Org_ID: department[0],
+      PtyBr_Org_ID: department[1],
+      PtyTm_Org_ID: department[2]
     }, this._success.bind(this), this._failure.bind(this))
   }
 
@@ -222,21 +222,21 @@ class PartyInfo extends React.Component {
 
   _success(resp) {
     if (resp.BK_STATUS == "00") {
-       this.info.centerDate.sj = resp.LIST1[0].Usr_Nm
-       this.info.centerDate.fsj = resp.LIST1[1].Usr_Nm
-       this.info.centerDate.jw =resp.LIST1[2].Usr_Nm
-       this.info.centerDate.zw= resp.LIST1[3].Usr_Nm
-       this.info.centerDate.xw = resp.LIST1[4].Usr_Nm
+      this.info.centerDate.sj = resp.LIST1[0].Usr_Nm
+      this.info.centerDate.fsj = resp.LIST1[1].Usr_Nm
+      this.info.centerDate.jw = resp.LIST1[2].Usr_Nm
+      this.info.centerDate.zw = resp.LIST1[3].Usr_Nm
+      this.info.centerDate.xw = resp.LIST1[4].Usr_Nm
 
-       this.info.branchDate.sj = resp.LIST2[0].Usr_Nm
-       this.info.branchDate.fsj = resp.LIST2[1].Usr_Nm
-       this.info.branchDate.jw = resp.LIST2[2].Usr_Nm
-       this.info.branchDate.zw = resp.LIST2[3].Usr_Nm
-       this.info.branchDate.xw = resp.LIST2[4].Usr_Nm
+      this.info.branchDate.sj = resp.LIST2[0].Usr_Nm
+      this.info.branchDate.fsj = resp.LIST2[1].Usr_Nm
+      this.info.branchDate.jw = resp.LIST2[2].Usr_Nm
+      this.info.branchDate.zw = resp.LIST2[3].Usr_Nm
+      this.info.branchDate.xw = resp.LIST2[4].Usr_Nm
 
-       this.info.groupData.zz = resp.Usr_Nm;
-       this.info.groupData.zy = resp.LIST3.map((item)=>{item.Usr_Nm}).join();
-       
+      this.info.groupData.zz = resp.Usr_Nm;
+      this.info.groupData.zy = resp.LIST3.map((item)=>{item.Usr_Nm}).join();
+ 
       this.setState({ ready: true })
     } else {
       alert(resp.BK_DESC)

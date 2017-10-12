@@ -16,34 +16,34 @@ export default class FC extends Component {
   _renderFront = () => {
     return (
       <Card style={{ borderRadius: 10 }}>
-        <CardItem header style={[styles.cardheader, { backgroundColor: this.props.item.Pty_Grp_Avy_CLCd === '02' ? 'red' : 'skyblue' }]}>
-          <Text style={{ fontWeight: '200', color: 'white' }}>{this.props.item.Pty_Grp_Avy_Nm}</Text>
+        <CardItem header style={[styles.cardheader, { backgroundColor: this.props.item.thpyadthmsAvyClcd === '02' ? 'red' : 'skyblue' }]}>
+          <Text style={{ fontWeight: '200', color: 'white' }}>{this.props.item.thpyadthmsAvyNm}</Text>
         </CardItem>
         <CardItem style={styles.cardbody}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Icon name='ios-move' color='blue' style={{ right: 5 }} size={16} />
               <Text style={{ fontSize: 14, fontWeight: '100' }}>
-                地点: {this.props.item.Pty_Grp_Avy_Plc_CntDsc}
+                地点: {this.props.item.thpyadthmavyplccntdsc}
               </Text>
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Icon name='ios-person' size={16} color='skyblue' style={{ right: 5 }} />
               <Text style={{ fontSize: 14, fontWeight: '100' }}>
-                发起人: {this.props.item.Usr_Nm}
+                活动联系人: {this.props.item.thpyadthmsavyctcpsnnm}
               </Text>
             </View>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Icon name='ios-time-outline' size={16} color='blue' style={{ right: 5 }} />
             <Text style={{ fontSize: 14, fontWeight: '100' }}>
-              活动开始时间: {this._transferST(this.props.item.Pty_Grp_Avy_StDt,this.props.item.Pty_Grp_Avy_StTm)}
+              活动开始时间: {this._transferST(this.props.item.thpyadthmsAvyStdt,this.props.item.thpyadthmsAvySttm)}
             </Text>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Icon name='ios-time-outline' size={16} color='blue' style={{ right: 5 }} />
             <Text style={{ fontSize: 14, fontWeight: '100' }}>
-              活动结束时间: {this._transferST(this.props.item.Pty_Grp_Avy_EdDt,this.props.item.Pty_Grp_Avy_EdTm)}
+              活动结束时间: {this._transferST(this.props.item.thpyadthmsAvyEddt,this.props.item.thpyadthmsAvyEdtm)}
             </Text>
           </View>
         </CardItem>
@@ -56,7 +56,7 @@ export default class FC extends Component {
   }
   //Desired screen view method in back page
   _renderBack = () => {
-    return <BackPage nav={this.props.nav} actId={this.props.item.Pty_Grp_Avy_ID} />
+    return <BackPage nav={this.props.nav} actId={this.props.item.thpyadthmsAvyId} />
   }
 
   render() {

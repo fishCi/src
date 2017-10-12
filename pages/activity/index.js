@@ -2,7 +2,7 @@
  * @Author: zhaozheng1.zh 
  * @Date: 2017-09-09 22:10:22 
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-09 18:00:25
+ * @Last Modified time: 2017-10-12 15:01:02
  */
 
 
@@ -112,13 +112,13 @@ export default class activity extends Component {
     const endDate = end.getFullYear() + "" + this.formatTime(end.getMonth() + 1) + "" + this.formatTime(end.getDate());
     const endTime = '235959';
     fetchPost('A08464102', {
-      Pty_Grp_Stm_Usr_ID: '12345678',
-      Pty_Grp_Avy_StDt: beginDate,
-      Pty_Grp_Avy_StTm: beginTime,
-      Pty_Grp_Avy_EdDt: endDate,
-      Pty_Grp_Avy_EdTm: endTime,
-      Pty_Grp_Avy_CLCd: type,
-      Pty_Grp_Enqr_Ind: flag,
+      thpyadthmsStmUsrId: '12345678',
+      thpyadthmsAvyStdt: beginDate,
+      thpyadthmsAvySttm: beginTime,
+      thpyadthmsAvyEddt: endDate,
+      thpyadthmsAvyEdtm: endTime,
+      thpyadthmsAvyClcd: type,
+      ptyGrpEnqrInd: flag,
       _pagination: {
         REC_IN_PAGE: pageCount,
         PAGE_JUMP: pageNo,
@@ -127,9 +127,9 @@ export default class activity extends Component {
     }, this._success.bind(this), this._failure.bind(this))
   };
 
-  _success(resp) {
+   _success(resp) {
     if (resp.BK_STATUS == "00") {
-      const acts = this.state.activities.concat(resp.LIST1)
+      const acts = this.state.activities.concat(resp.list)
       this.setState({
         activities: acts
       },

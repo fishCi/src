@@ -2,7 +2,7 @@
  * @Author: zhaozheng1.zh 
  * @Date: 2017-09-29 10:47:42 
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-09-30 16:00:44
+ * @Last Modified time: 2017-10-12 15:19:17
  */
 
 import React, { Component } from 'react';
@@ -11,6 +11,7 @@ import { Container, Header, Left, Body, Right, Button, Title, Text, Card, CardIt
 import Icon from 'react-native-vector-icons/Ionicons';
 import common from '../../common'
 import { fetchPost } from '../../utils/fetchAPI';
+import { getUser } from '../../utils/StorageUtil'
 
 export default class BackPage extends Component {
 
@@ -36,10 +37,11 @@ export default class BackPage extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        u = await getUser();        
         fetchPost('A08464103', {
-            Pty_Grp_Avy_ID: this.props.actId,
-            Pty_Grp_Stm_Usr_ID: '12345678'
+            thpyadthmsAvyId: this.props.actId,
+            thpyadthmsStmUsrId: u.thpyadthmsStmUsrId
         }, this._success.bind(this), this._failure.bind(this))
 
     }
@@ -55,22 +57,22 @@ export default class BackPage extends Component {
         });
         if (resp.BK_STATUS == "00") {
             this.setState({
-                title: resp.Pty_Grp_Avy_Nm,
-                address: resp.Pty_Grp_Avy_Plc_CntDsc,
-                description: resp.Pty_Grp_Avy_CntDsc,
-                type: resp.Pty_Grp_Avy_CLCd,
+                title: resp.thpyadthmsAvyNm,
+                address: resp.thpyadthmavyplccntdsc,
+                description: resp.thpyadthmsAvyCntdsc,
+                type: resp.thpyadthmsAvyClcd,
                 // secondtype: '',
-                detail: resp.Pty_Grp_Avy_Dtl_CntDsc,
-                tip: resp.PtyGrpAvy_Ancm_CntDsc,
-                isreg: resp.Pty_Grp_Avy_Rgst_Ind,
-                starttime: this._transferST(resp.Pty_Grp_Avy_StDt, resp.Pty_Grp_Avy_StTm),
-                endtime: this._transferST(resp.Pty_Grp_Avy_EdDt, resp.Pty_Grp_Avy_EdTm),
-                regstarttime: this._transferST(resp.Pty_Grp_Avy_Rgst_StDt, resp.Pty_Grp_Avy_Rgst_StTm),
-                regendtime: this._transferST(resp.Pty_Grp_Avy_Rgst_EdDt, resp.Pty_Grp_Avy_Rgst_EdTm),
-                host: resp.Pty_Grp_Avy_CtcPsn_Nm,
-                phone: resp.PtyGrpAvyCtcPsn_TelNo,
+                detail: resp.thpyadthmavydtlcntdsc,
+                tip: resp.thpyadthmayancmcntdsc,
+                isreg: resp.thpyadthmsavyrgstInd,
+                starttime: this._transferST(resp.thpyadthmsAvyStdt, resp.thpyadthmsAvySttm),
+                endtime: this._transferST(resp.thpyadthmsAvyEddt, resp.thpyadthmsAvyEdtm),
+                regstarttime: this._transferST(resp.thpyadthmsavyrgststdt, resp.thpyadthmsavyrgststtm),
+                regendtime: this._transferST(resp.thpyadthmsavyrgstcodt, resp.thpyadthmsargstctoftm),
+                host: resp.thpyadthmsavyctcpsnnm,
+                phone: resp.thpyadthmactcpsntelno,
 
-                hasReg:resp.PcpPty_Grp_Avy_TpCd
+                hasReg:resp.pcpthpyadthmsavyTpcd
             });
         } else {
             alert(resp.BK_DESC)
@@ -217,7 +219,9 @@ export default class BackPage extends Component {
             regstarttime: this.state.regstarttime,
             regendtime: this.state.regendtime,
             host: this.state.host,
-            phone: this.state.phone
+            phone: this.state.phone,
+            
+            hasReg:this.state.hasReg
         };
         return res;
     }

@@ -25,18 +25,18 @@ export default class Person extends Component {
   async componentDidMount() {
     u = await getUser();
     fetchPost('A08463101', {
-      Pty_Grp_Stm_Usr_ID: u.Pty_Grp_Stm_Usr_ID,
+      thpyadthmsStmUsrId: u.thpyadthmsStmUsrId,
     }, this._success.bind(this), this._failure.bind(this))
   }
 
 
   _success(resp) {
     if (resp.BK_STATUS == "00") {
-      this.name = resp.Usr_Nm;
-      this.dscp = resp.Wrk_Unit_Nm + ' ' + resp.Blng_Dept_Nm;
-      this.department = resp.PtyTbr_Org_Nm + ' ' + resp.PtyBr_Org_Nm + ' ' + resp.PtyTm_Org_Nm;
+      this.name = resp.usrNm;
+      this.dscp = resp.wrkUnitNm + ' ' + resp.blngDeptNm;
+      this.department = resp.ptytbrOrgNm + ' ' + resp.ptybrchOrgNm + ' ' + resp.ptygrpOrgNm;
       this.pos = resp.List3 === undefined? true:false
-      for (let i = 0; i < resp.LIST1.length; i++) {
+      for (let i = 0; i < resp.list1.length; i++) {
         let item = {
           lineColor: 'red',
           icon: require('../../img/person/dang.png'),
@@ -44,8 +44,8 @@ export default class Person extends Component {
           title: '',
           description: ''
         };
-        item.time = resp.LIST1[i].Rsm_StDt;
-        item.title = resp.LIST1[i].PtyTbr_Org_Nm + ' ' + resp.LIST1[i].PtyBr_Org_Nm + ' ' + resp.LIST1[i].PtyTm_Org_Nm
+        item.time = resp.list1[i].rsmStdt;
+        item.title = resp.list1[i].ptytbrOrgNm + ' ' + resp.list1[i].ptybrchOrgNm + ' ' + resp.list1[i].ptygrpOrgNm
         item.description = '党员'
         this.records.push(item);
       }
