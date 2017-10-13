@@ -4,7 +4,9 @@ import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Sepa
 import common from '../../common'
 import EmptyView from '../../components/EmptyView'
 import Icon from 'react-native-vector-icons/Ionicons';
+
 import { getUser } from '../../utils/StorageUtil'
+import { fetchPost } from '../../utils/fetchAPI';
 
 export default class Person extends Component {
 
@@ -18,7 +20,7 @@ export default class Person extends Component {
   name = '';
   dscp = '中国建设银行 北京开发中心';
   department = '';
-  records = '';
+  records = [];
   pos = false;
 
 
@@ -30,13 +32,13 @@ export default class Person extends Component {
   }
 
 
-  _success(resp) {
+  _success = (resp) => {
     if (resp.BK_STATUS == "00") {
       this.name = resp.usrNm;
       this.dscp = resp.wrkUnitNm + ' ' + resp.blngDeptNm;
       this.department = resp.ptytbrOrgNm + ' ' + resp.ptybrchOrgNm + ' ' + resp.ptygrpOrgNm;
       this.pos = resp.List3 === undefined? true:false
-      for (let i = 0; i < resp.list1.length; i++) {
+      for (let i = 0; resp.list1!=undefined && i < resp.list1.length; i++) {
         let item = {
           lineColor: 'red',
           icon: require('../../img/person/dang.png'),
@@ -73,7 +75,7 @@ export default class Person extends Component {
               <Thumbnail square size={80} source={require('../../img/person/hongjun.png')} />
               <Body>
                 <Text>{this.name}</Text>
-                <Text note>{this.dscp}}</Text>
+                <Text note>{this.dscp}</Text>
               </Body>
             </ListItem>
             <Separator />

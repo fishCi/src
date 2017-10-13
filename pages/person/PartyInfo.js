@@ -2,7 +2,7 @@
 * @Author: miaoxinyu.zh
 * @Date:   2017-08-22 06:06:10
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-12 15:32:47
+ * @Last Modified time: 2017-10-12 21:47:47
 */
 
 import React from 'react';
@@ -22,6 +22,7 @@ import { getPartyPieData } from '../../utils/PartyData'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { PieChart } from 'react-native-charts-wrapper';
 import { getUser } from '../../utils/StorageUtil'
+import { fetchPost } from '../../utils/fetchAPI';
 
 const legend = {
   enabled: true,
@@ -33,8 +34,8 @@ const legend = {
 
 class PartyInfo extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       ready: false,
       position: this.props.navigation.state.params.pos, //enum：zongzhi，zhibu
@@ -167,10 +168,10 @@ class PartyInfo extends React.Component {
             </View>
             <View style={{ flex: 2, paddingVertical: 10 }}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                <Text style={{ flex: 1, fontSize: 12 }}>党小组组长：{info.groupData.zz}</Text>
+                <Text style={{ flex: 1, fontSize: 12 }}>党小组组长：{this.info.groupData.zz}</Text>
               </View>
               <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                <Text style={{ flex: 1, fontSize: 12 }}>党小组组员：{info.groupData.zy}</Text>
+                <Text style={{ flex: 1, fontSize: 12 }}>党小组组员：{this.info.groupData.zy}</Text>
               </View>
             </View>
           </View>

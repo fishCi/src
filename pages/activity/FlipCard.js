@@ -24,13 +24,13 @@ export default class FC extends Component {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Icon name='ios-move' color='blue' style={{ right: 5 }} size={16} />
               <Text style={{ fontSize: 14, fontWeight: '100' }}>
-                地点: {this.props.item.thpyadthmavyplccntdsc}
+                地点: {this.props.item.thpyadthmavyplccntdsc.trim() === undefined?'待定':this.props.item.thpyadthmavyplccntdsc}
               </Text>
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Icon name='ios-person' size={16} color='skyblue' style={{ right: 5 }} />
               <Text style={{ fontSize: 14, fontWeight: '100' }}>
-                活动联系人: {this.props.item.thpyadthmsavyctcpsnnm}
+                活动发起人: {this.props.item.usrNm}
               </Text>
             </View>
           </View>

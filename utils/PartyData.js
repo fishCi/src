@@ -2,8 +2,19 @@
 * @Author: miaoxinyu.zh
 * @Date:   2017-08-22 06:06:10
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-11 07:00:44
+ * @Last Modified time: 2017-10-12 21:27:58
 */
+
+import React from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  processColor
+} from 'react-native';
+
+import {PieChart} from 'react-native-charts-wrapper';
 
 _getPID = (v1, v2) => {
     let info = {

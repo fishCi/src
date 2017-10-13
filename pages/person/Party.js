@@ -15,8 +15,8 @@ class Party extends Component {
   records = [];
   pos = '';
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.name = this.props.navigation.state.params.name;
     this.department = this.props.navigation.state.params.department;
     this.records =  this.props.navigation.state.params.records; 

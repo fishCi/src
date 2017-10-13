@@ -2,7 +2,7 @@
  * @Author: zhaozheng1.zh 
  * @Date: 2017-09-29 10:47:42 
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-12 15:19:17
+ * @Last Modified time: 2017-10-12 21:40:43
  */
 
 import React, { Component } from 'react';
@@ -37,11 +37,13 @@ export default class BackPage extends Component {
         }
     }
 
+    u = {};
+
     async componentDidMount() {
-        u = await getUser();        
+        this.u = await getUser();        
         fetchPost('A08464103', {
             thpyadthmsAvyId: this.props.actId,
-            thpyadthmsStmUsrId: u.thpyadthmsStmUsrId
+            thpyadthmsStmUsrId: this.u.thpyadthmsStmUsrId
         }, this._success.bind(this), this._failure.bind(this))
 
     }
@@ -187,8 +189,8 @@ export default class BackPage extends Component {
 
     registe = () => {
         fetchPost('A08464105', {
-            Pty_Grp_Avy_ID: this.props.actId,
-            Pty_Grp_Stm_Usr_ID: '87654321'
+            thpyadthmsAvyId: this.props.actId,
+            thpyadthmsStmUsrId: this.u.thpyadthmsStmUsrId
         },
             (resp) => {
                 if (resp.BK_STATUS == "00" &&  resp.ScsInd == "0" ) {

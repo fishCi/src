@@ -2,7 +2,7 @@
  * @Author: zhaozheng1.zh 
  * @Date: 2017-09-09 22:10:22 
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-12 15:01:02
+ * @Last Modified time: 2017-10-12 20:08:39
  */
 
 
@@ -15,6 +15,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import FC from './FlipCard';
 import EmptyView from '../../components/EmptyView';
 import { fetchPost } from '../../utils/fetchAPI';
+import { getUser } from '../../utils/StorageUtil';
+
 
 const butts = [{ name: '全部', type: '00' }, { name: '党', type: '02' }, { name: '团', type: '03' }, { name: '工会', type: '04' }, { name: '协会', type: '05' }, { name: '其他', type: '01' }];
 const buttonmenus = ['我发起的', '我参与的']
@@ -81,7 +83,7 @@ export default class activity extends Component {
         <View style={styles.activityList}>
           {ready ? <FlatList
             data={activities}
-            keyExtractor={(item, index) => item.Pty_Grp_Avy_ID}
+            keyExtractor={(item, index) => item.thpyadthmsAvyId}
             renderItem={this._renderActivityItem}
             onEndReached={this.fetchMore}
             ListFooterComponent={() => {
@@ -134,7 +136,7 @@ export default class activity extends Component {
         activities: acts
       },
         () => {
-          if (resp._COMMON.COMB.CURR_TOTAL_PAGE == resp._COMMON.COMB.TOTAL_PAGE) {
+          if (resp.comb.curr_total_page == resp.comb.total_page) {
             this.listPageEnd = true;
           }
           this.setState({

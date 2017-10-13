@@ -2,7 +2,7 @@
  * @Author: zhaozheng1.zh 
  * @Date: 2017-09-11 14:57:49 
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-12 15:38:48
+ * @Last Modified time: 2017-10-13 09:51:54
  */
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ImageBackground } from 'react-native';
@@ -39,11 +39,10 @@ const validate = values => {
 
 const submit = (values, navigate) => {
     fetchPost('A08461101', {
-        usrNm: values.name,
+        empeIdLandNm: values.name,
         usrPswd: values.password,
-        moveTelNo: '',
-        rsrvFld1: '',
-        rsrvFld2: '',
+        cstCtcTel: '',
+        usrIpAdr:''
     }, resp => success(resp, navigate), failure)
 
     // const json = await this.fetchUser();

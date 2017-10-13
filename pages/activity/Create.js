@@ -287,7 +287,7 @@ export default class CreateActivity extends Component {
     );
   }
 
-  _submit = async() => {
+  _submit = async () => {
     u = await getUser();
     if (this.validate() == true) {
       this.state.isEdit
@@ -346,7 +346,7 @@ export default class CreateActivity extends Component {
       thpyadthmsAvySttm: this.state.starttime.split(' ')[1].replace(':', '') + "00",
       thpyadthmsAvyEddt: this.state.endtime.split(' ')[0].replace(/-/g, ''),		//活动结束日期
       thpyadthmsAvyEdtm: this.state.endtime.split(' ')[1].replace(':', '') + "00",
-      thpyadthmsavyrgstInd: this.state.isreg ? 1 : 0,
+      thpyadthmsavyrgstInd: this.state.isreg ? '1' : '0',
       thpyadthmsavyrgststdt: this.state.isreg ? this.state.regstarttime.split(' ')[0].replace(/-/g, '') : '00000000',		    //活动报名开始日期
       thpyadthmsavyrgststtm: this.state.isreg ? this.state.regstarttime.split(' ')[1].replace(':', '') + "00" : '000000',
       thpyadthmsavyrgstcodt: this.state.isreg ? this.state.regendtime.split(' ')[0].replace(/-/g, '') : '00000000',			//活动报名结束日期
