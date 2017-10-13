@@ -2,16 +2,14 @@
  * @Author: zhaozheng1.zh 
  * @Date: 2017-09-11 14:57:49 
  * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-13 09:51:54
+ * @Last Modified time: 2017-10-13 14:06:49
  */
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ImageBackground } from 'react-native';
 import { Container, Item, Input, Header, Body, Content, Title, Button, Text, Spinner, Label, Toast, Root } from 'native-base';
 import { Field, reduxForm } from 'redux-form';
 import common from '../common'
-import { fetchPost } from '../utils/fetchAPI'
-
-
+import { fetchPost } from '../utils/fetchAPI';
 
 const validate = values => {
     const error = {};
@@ -171,7 +169,7 @@ class LoginForm extends Component {
         const { handleSubmit, navigation: { navigate } } = this.props;
         return (
             <Root>
-                <ImageBackground style={styles.backgroundImage} source={require('../img/yangguang.png')} resizeMode='cover'>
+                <ImageBackground style={styles.backgroundImage} source={require('../img/login.png')} resizeMode='cover'>
                     <Container style={styles.userform}>
                         <Content padder>
                             <Image source={require('../img/CCB.png')} style={{ alignSelf: 'center' }} />
