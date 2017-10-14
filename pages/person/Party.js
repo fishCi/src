@@ -38,6 +38,7 @@ class Party extends Component {
           </List>
           <View style={styles.container}>
             <Text style={{ fontWeight: 'bold' }}>党员历程</Text>
+            {this.records.length != 0 &&
             <Timeline
               style={styles.list}
               data={this.records}
@@ -55,7 +56,7 @@ class Party extends Component {
               separator={false}
               detailContainerStyle={{ marginBottom: 20, paddingLeft: 5, paddingRight: 5, backgroundColor: "#BBDAFF", borderRadius: 10 }}
               columnFormat='two-column'
-            />
+            />}
           </View>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 100, marginBottom: 20 }}>
             <Button bordered danger onPress={() => this.props.navigation.navigate('PartyFee')} style={{ height: 30 }}>

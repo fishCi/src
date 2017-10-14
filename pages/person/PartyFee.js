@@ -1,8 +1,8 @@
 /*
 * @Author: miaoxinyu.zh
 * @Date:   2017-08-22 06:06:10
- * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-11 10:40:24
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2017-10-13 14:48:14
 */
 import React from 'react';
 import {
@@ -22,7 +22,7 @@ import { fetchPost } from '../../utils/fetchAPI';
 
 class PartyFee extends React.Component {
 
-  constructor(propretuers) {
+  constructor(props) {
     super(props);
     this.state = {
       ready: false,

@@ -20,6 +20,7 @@ export default class Person extends Component {
   name = '';
   dscp = '中国建设银行 北京开发中心';
   department = '';
+  departmentIds = '';
   records = [];
   pos = false;
 

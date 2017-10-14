@@ -1,8 +1,8 @@
 /*
  * @Author: zhaozheng1.zh 
  * @Date: 2017-09-11 14:57:49 
- * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-13 14:06:49
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2017-10-13 17:04:19
  */
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ImageBackground } from 'react-native';
@@ -29,9 +29,9 @@ const validate = values => {
     // if (!ema.includes('@') && ema !== '') {
     //     error.email = '@ not included';
     // }
-    if (pw.length > 8) {
-        error.password = 'max 8 characters';
-    }
+    // if (pw.length > 8) {
+    //     error.password = 'max 8 characters';
+    // }
     return error;
 };
 
@@ -118,6 +118,7 @@ const submit = (values, navigate) => {
 
 function success(resp, navigate) {
     if (resp.BK_STATUS == "00") {
+        // alert(JSON.stringify(resp))
         storage.save({
             key: 'user',
             data: JSON.stringify(resp),

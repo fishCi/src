@@ -1,78 +1,79 @@
 import React, { Component } from 'react';
+import Icon from 'react-native-vector-icons/Ionicons';
+import EmptyView from '../../components/EmptyView';
+import common from '../../common';
 import { View, StyleSheet, StatusBar, Image, TouchableOpacity, ScrollView, RefreshControl, Dimensions } from 'react-native';
 import { Content, Left, Body, Right, List, ListItem, Separator, Text, Button, Thumbnail } from 'native-base';
-import common from '../../common';
-import EmptyView from '../../components/EmptyView';
-import Icon from 'react-native-vector-icons/Ionicons';
-
 export default class PersonInfo extends Component {
-
     render() {
         return (
             <View>
                 <List>
                     <ListItem>
+                    <ListItem style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                    <ListItem style={{ flexDirection: 'column' }}>
+                    </ListItem>
+                    </ListItem>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+                        <View style={{ flexDirection: 'row' }}>
+                        <View style={{ flexDirection: 'row' }}>
+                        <View style={{ flexDirection: 'row' }}>
+                        <View style={{ flexDirection: 'row' }}>
+                        <View style={{ flexDirection: 'row' }}>
+                        <View style={{ flexDirection: 'row' }}>
+                        <View style={{ alignSelf: 'flex-start', paddingBottom: 5, flexDirection: 'row' }}>
                         <Thumbnail square size={80} source={require('../../img/person/hongjun.png')} />
                         <Body>
-                            <Text>张三</Text>
-                            <Text note>北京开发中心 开发三处</Text>
+                        </View>
+                        </View>
+                        </View>
+                        </View>
+                        </View>
+                        </View>
+                        </View>
                         </Body>
-                    </ListItem>
-                    <ListItem style={{ flexDirection: 'column' }}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
-                                <Text style={styles.left}>籍贯: 北京市</Text>
-                            </View>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
-                                <Text style={styles.left}>政治面貌: 党员</Text>
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
-                                <Text style={styles.left}>参加工作时间: 2010年8月</Text>
-                            </View>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
-                                <Text style={styles.left}>来建行时间: 2014年7月</Text>
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
-                                <Text style={styles.left}>机构名称: 北京开发中心</Text>
-                            </View>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
-                                <Text style={styles.left}>部门名称: 开发四处</Text>
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
-                                <Text style={styles.left}>职务等级：一职等</Text>
-                            </View>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
-                                <Text style={styles.left}>现任职务: 业务经理</Text>
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
-                                <Text style={styles.left}>专业技术资格：高级工程师</Text>
-                            </View>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
-                                <Text style={styles.left}>任职时间: 2014年12月</Text>
-                            </View>
-                        </View>
-                    </ListItem>
-
-                    <ListItem style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                        <View style={{ alignSelf: 'flex-start', paddingBottom: 5, flexDirection: 'row' }}>
-                            <Icon.Button name='md-bookmarks' size={25} color='green' backgroundColor='lightgrey' style={{ height: 25 }}>
-                                <Text style={[styles.left, { color: 'green' }]}> 履历</Text>
-                            </Icon.Button>
-                        </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                            <Text style={styles.left}>2000.9~2004.7:清华大学 计算机专业 大学本科毕业</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row' }}>
                             <View>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+                            <Text>张三</Text>
+                            <Text style={styles.left}>2000.9~2004.7:清华大学 计算机专业 大学本科毕业</Text>
+                            <Text note>北京开发中心 开发三处</Text>
+                            <Icon.Button name='md-bookmarks' size={25} color='green' backgroundColor='lightgrey' style={{ height: 25 }}>
+                            </View>
+                            </View>
+                            </View>
+                            </View>
+                            </View>
+                            </View>
+                            </View>
+                            </View>
+                            </View>
+                            </View>
+                            </Icon.Button>
+                                <Text style={styles.left}>专业技术资格：高级工程师</Text>
+                                <Text style={styles.left}>职务等级：一职等</Text>
+                                <Text style={styles.left}>政治面貌: 党员</Text>
+                                <Text style={styles.left}>现任职务: 业务经理</Text>
+                                <Text style={styles.left}>任职时间: 2014年12月</Text>
+                                <Text style={styles.left}>来建行时间: 2014年7月</Text>
+                                <Text style={styles.left}>籍贯: 北京市</Text>
+                                <Text style={styles.left}>机构名称: 北京开发中心</Text>
+                                <Text style={styles.left}>参加工作时间: 2010年8月</Text>
+                                <Text style={styles.left}>部门名称: 开发四处</Text>
                                 <Text style={styles.left}>2004.9~2007.7:清华大学 计算机专业 硕士研究生毕业</Text>
+                                <Text style={[styles.left, { color: 'green' }]}> 履历</Text>
+
+
+
+
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row' }}>

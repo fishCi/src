@@ -1,8 +1,8 @@
 /*
 * @Author: miaoxinyu.zh
 * @Date:   2017-08-22 06:06:10
- * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-12 21:47:47
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2017-10-13 16:40:25
 */
 
 import React from 'react';
@@ -44,7 +44,8 @@ class PartyInfo extends React.Component {
       data: getPartyPieData('sex')
     }
   }
-
+  
+  department = this.props.navigation.state.params.department.split(' ');
   info = {
     centerData: {
       sj: '',
@@ -96,7 +97,7 @@ class PartyInfo extends React.Component {
         <ScrollView>
           <View style={{ height: 100, backgroundColor: 'white', flexDirection: 'row', borderTopWidth: 6, borderBottomWidth: 6, borderColor: 'darkblue', marginVertical: 5 }}>
             <View style={{ flex: 1, alignItems: 'center' }}>
-              <Text style={{ color: 'red', fontWeight: 'bold', marginTop: 10, fontSize: 14 }}>北开党总支</Text>
+              <Text style={{ color: 'red', fontWeight: 'bold', marginTop: 10, fontSize: 14 }}>{this.department[0]}</Text>
               <Image source={require('../../img/person/zongzhi.png')} style={{ marginTop: 10 }} />
             </View>
             <View style={{ flex: 2, paddingVertical: 10 }}>
@@ -128,7 +129,7 @@ class PartyInfo extends React.Component {
                 //   </View>
                 // </ModalDropdown>
                 // : 
-                <Text style={{ color: 'red', fontWeight: 'bold', marginTop: 10, fontSize: 14 }}>第一党支部</Text>
+                <Text style={{ color: 'red', fontWeight: 'bold', marginTop: 10, fontSize: 14 }}>{this.department[1]}</Text>
 
               }
               <Image source={require('../../img/person/zhibu.png')} style={{ marginTop: 10 }} />
@@ -153,7 +154,7 @@ class PartyInfo extends React.Component {
             <View style={{ flex: 1, alignItems: 'center' }}>
               {
                 // this.state.position === '' ?
-                <Text style={{ color: 'red', fontWeight: 'bold', marginTop: 10, fontSize: 14 }}>第一党小组</Text>
+                <Text style={{ color: 'red', fontWeight: 'bold', marginTop: 10, fontSize: 14 }}>{this.department[2]}</Text>
                 // : <ModalDropdown dropdownStyle={{ height: 20, width: 40, marginTop: 10 }}
                 //   options={['第一党小组', '第二党小组']}
                 //   dropdownStyle={{ alignSelf: 'center', height: 80, borderWidth: 1, borderRadius: 3 }}
@@ -211,32 +212,74 @@ class PartyInfo extends React.Component {
   }
 
   async componentDidMount() {
-    const department = this.props.navigation.state.params.department.split(' ');
+    let u = await getUser();
     fetchPost('A08463105', {
-      ptytbrOrgId: department[0],
-      ptybrchOrgId: department[1],
-      ptygrpOrgId: department[2]
+      ptytbrOrgId: u.ptytbrOrgId,
+      ptybrchOrgId: u.ptybrchOrgId,
+      ptygrpOrgId: u.ptygrpOrgId
     }, this._success.bind(this), this._failure.bind(this))
   }
 
 
+  _rolemap = (parGrp, list) => {
+    list.map(item=>{
+      switch(item.ptymbrPostTpcd) {
+        case '01':
+          parGrp.sj = item.usrNm;
+          break;
+        case '02':
+          parGrp.fsj = item.usrNm;
+          break;
+        case '03':
+          parGrp.dw = item.usrNm;
+          break;
+        case '04':
+          parGrp.xw = item.usrNm;
+          break;
+        case '05':
+          parGrp.zw = item.usrNm;
+          break;
+        case '06':
+          parGrp.jw = item.usrNm;
+          break;
+        case '07':
+          parGrp.qw = item.usrNm;
+          break;
+        case '08':
+          parGrp.qg = item.usrNm;
+          break;
+        case '09':
+          parGrp.bw = item.usrNm;
+          break;
+        case '10':
+          parGrp.zz = item.usrNm;
+          break;
+        default:
+          break;
+      }
+    });
+  }
 
-  _success(resp) {
+  _success = (resp) => {
+    
+    alert(JSON.stringify(resp))
     if (resp.BK_STATUS == "00") {
-      this.info.centerDate.sj = resp.list1[0].usrNm
-      this.info.centerDate.fsj = resp.list1[1].usrNm
-      this.info.centerDate.jw = resp.list1[2].usrNm
-      this.info.centerDate.zw = resp.list1[3].usrNm
-      this.info.centerDate.xw = resp.list1[4].usrNm
+      this._rolemap(this.info.centerData, resp.list1);
+      this._rolemap(this.info.branchData, resp.list2);
+      // this.info.centerDate.sj = resp.list1[0].usrNm
+      // this.info.centerDate.fsj = resp.list1[1].usrNm
+      // this.info.centerDate.jw = resp.list1[2].usrNm
+      // this.info.centerDate.zw = resp.list1[3].usrNm
+      // this.info.centerDate.xw = resp.list1[4].usrNm
 
-      this.info.branchDate.sj = resp.list2[0].usrNm
-      this.info.branchDate.fsj = resp.list2[1].usrNm
-      this.info.branchDate.jw = resp.list2[2].usrNm
-      this.info.branchDate.zw = resp.list2[3].usrNm
-      this.info.branchDate.xw = resp.list2[4].usrNm
+      // this.info.branchDate.sj = resp.list2[0].usrNm
+      // this.info.branchDate.fsj = resp.list2[1].usrNm
+      // this.info.branchDate.jw = resp.list2[2].usrNm
+      // this.info.branchDate.zw = resp.list2[3].usrNm
+      // this.info.branchDate.xw = resp.list2[4].usrNm
 
       this.info.groupData.zz = resp.usrNm;
-      this.info.groupData.zy = resp.list3.map((item)=>{item.usrNm}).join();
+      this.info.groupData.zy = resp.list3.map((item)=>item.usrNm).join();
  
       this.setState({ ready: true })
     } else {

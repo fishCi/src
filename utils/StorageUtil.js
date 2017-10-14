@@ -12,7 +12,7 @@ var storage = new Storage({
 global.storage = storage;
 
 export function getUser(){
-  storage.load({
+  return storage.load({
     key: 'user',
   }).then(ret => JSON.parse(ret)
   ).catch(err => alert(err.message))

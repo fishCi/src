@@ -24,7 +24,7 @@ export default class FC extends Component {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Icon name='ios-move' color='blue' style={{ right: 5 }} size={16} />
               <Text style={{ fontSize: 14, fontWeight: '100' }}>
-                地点: {this.props.item.thpyadthmavyplccntdsc.trim() === undefined?'待定':this.props.item.thpyadthmavyplccntdsc}
+                地点: {this.props.item.thpyadthmavyplccntdsc === undefined?'待定':this.props.item.thpyadthmavyplccntdsc}
               </Text>
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>

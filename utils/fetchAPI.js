@@ -1,8 +1,8 @@
 /*
  * @Author: zhaozheng1.zh 
  * @Date: 2017-09-28 14:59:05 
- * @Last Modified by: zhaozheng1.zh
- * @Last Modified time: 2017-10-12 15:56:50
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2017-10-13 15:55:58
  */
 
 import CONFIG from './config';
@@ -12,7 +12,9 @@ export function fetchPost(serviceId, jsonData, success, failure){
         jd = JSON.stringify(jsonData);
         url =`${CONFIG.URL}?_fw_service_id=F30070011&jsonClass=java.util.HashMap&jsonData=${jd}`;
         fetch(url)
-            .then((response) =>response.json())
+            .then((response) =>{
+                alert(JSON.stringify(response))
+                return response.json()})
             .then((responseText) => success(responseText))
             .catch((error) => failure(error));
     };

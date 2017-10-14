@@ -363,7 +363,7 @@ export default class CreateActivity extends Component {
       thpyadthmsStmUsrId:u.thpyadthmsStmUsrId,
       empeIdLandNm:u.empeIdLandNm,
       hmnrscEmpid:u.hmnrscEmpid,
-      usrblngthpyathmsorgnm:'北京开发中心党总支 - 第一党支部 - 第二党小组',
+      usrblngthpyathmsorgnm:u.ptytbrOrgId + ' - ' + u.ptybrchOrgId + ' - ' + u.ptygrpOrgId,
       usrNm:u.usrNm,
       pcpthpyadthmsavyTpcd:this.state.hasReg
 
